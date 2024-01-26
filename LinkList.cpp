@@ -1,4 +1,5 @@
 #include <iostream>
+using namespace std;
 
 class Node
 {
@@ -24,25 +25,56 @@ public:
     LinkedList(int val)
     {
         Node *newNode = new Node(val);
-        this->head = newNode;
-        this->tail = newNode;
-        this->length = 1;
+        head = newNode;
+        tail = newNode;
+        length = 1;
     }
 
-    ~LinkedList() {
-        Node *temp = head;
-        while(head) {
-            head = head->next;
-            delete  temp;
+    ~LinkedList()
+    {
+        Node *temp;
+        while (head)
+        {
             temp = head;
-            
+            head = head->next;
+            delete temp;
         }
+    }
+
+    void preppend(int val)
+    {
+        Node *newHead = new Node(val);
+        if (length == 0)
+        {
+            head = newHead;
+            tail = newHead;
+        }
+        else
+        {
+            newHead->next = head;
+            head = newHead;
+        }
+        length++;
+    }
+
+    void append(int val)
+    {
+        Node *newTail = new Node(val);
+        if (length == 0)
+        {
+            head = newTail;
+            tail = newTail;
+        }
+        else
+        {
+            tail->next = newTail;
+            tail = newTail;
+        }
+        length++;
     }
 
     void printList()
     {
-        using namespace std;
-        ;
         Node *ptr = head;
         while (ptr)
         {
@@ -51,15 +83,29 @@ public:
         }
     }
 
-    void getData() {
-        using namespace std;;
-        cout << head->val << "\n"<< tail->val << "\n" << length << endl;
+    void getData()
+    {
+    if (head)
+        {
+    // cout << "Head: "  << "\n";
+            // cout << "Tail: " << tail->val << "\n";
+            // cout << "Length: " << length << "\n";
+        }
+        else
+        {
+            cout << "List is empty\n";
+        }
     }
 };
 
-
-int main() {
-    LinkedList* ll = new LinkedList(6);
-
+int main()
+{
+    LinkedList *ll = new LinkedList(6);
+    ll->append(2);
+    ll->preppend(0);
+    ll->printList();
     ll->getData();
+    ll->printList();
+    delete ll;
+    return 0;
 }
