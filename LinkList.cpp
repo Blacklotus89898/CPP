@@ -29,6 +29,16 @@ public:
         this->length = 1;
     }
 
+    ~LinkedList() {
+        Node *temp = head;
+        while(head) {
+            head = head->next;
+            delete  temp;
+            temp = head;
+            
+        }
+    }
+
     void printList()
     {
         using namespace std;
